@@ -1,0 +1,30 @@
+{
+  "name": "Ephraim Shibru — Software Developer",
+  "short_name": "Ephraim Shibru",
+  "description": "Portfolio of Ephraim Shibru — a software developer building practical web applications, business management systems, AI-powered solutions, and digital products.",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#06101e",
+  "theme_color": "#06101e",
+  "icons": [
+    {
+      "src": "/favicon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
