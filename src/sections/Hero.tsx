@@ -38,25 +38,25 @@ export function Hero() {
             </p>
 
             <h1 className="hero__title">
-              Building <em>practical</em> digital solutions for real-world problems.
+              <span className="hero__name">{site.name}</span>{' '}
+              <span className="hero__role">
+                <span className="hero__role-primary">{site.role}</span>
+                <span className="hero__role-divider" aria-hidden="true" />
+                {' '}
+                <span className="hero__role-focus">{site.focus}</span>
+              </span>
             </h1>
 
-            <p className="hero__text">
-              I'm {site.name}, a software developer combining full-stack engineering and business
-              thinking to build modern web applications, intelligent tools, and practical business
-              systems.
-            </p>
-            <p className="hero__text hero__text--muted">
-              Open to meaningful projects, freelance work, and startup collaborations.
-            </p>
+            <p className="hero__text">{site.heroIntro}</p>
+            <p className="hero__text hero__text--muted">{site.heroSupporting}</p>
 
             <div className="hero__actions">
               <Link to="/#projects" className="btn btn--primary">
                 Explore my work
                 <Icon name="arrow-right" size={17} />
               </Link>
-              <Link to="/#collaboration" className="btn btn--ghost">
-                Let's collaborate
+              <Link to="/#contact" className="btn btn--ghost">
+                Discuss a project
                 <Icon name="arrow-up-right" size={16} />
               </Link>
             </div>

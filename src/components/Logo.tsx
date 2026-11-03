@@ -1,5 +1,6 @@
 import { useId } from 'react'
 import { Link } from 'react-router-dom'
+import { site } from '../data/site'
 
 interface LogoProps {
   to?: string
@@ -43,7 +44,7 @@ export function Logo({ to = '/', className, showRole = true }: LogoProps) {
       </svg>
       <span className="brand__text">
         <span className="brand__name">Ephraim Shibru</span>
-        {showRole ? <span className="brand__role">Software Developer</span> : null}
+        {showRole ? <span className="brand__role">{site.role}</span> : null}
       </span>
     </>
   )

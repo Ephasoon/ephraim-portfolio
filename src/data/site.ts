@@ -1,17 +1,22 @@
 export const site = {
   name: 'Ephraim Shibru',
   firstName: 'Ephraim',
-  role: 'Software Developer',
-  positioning: 'Software Developer · IT Student · Business Technology',
+  role: 'Full-Stack Developer',
+  focus: 'Business Systems & AI Solutions',
+  positioning: 'Full-Stack Developer | Business Systems & AI Solutions',
+  heroIntro:
+    'I build practical web applications, backend services, and business management systems that solve real-world problems. Combining software engineering with business understanding, I turn ideas and operational challenges into functional digital solutions.',
+  heroSupporting:
+    'From full-stack development and backend architecture to business workflow automation and AI integration, I focus on building useful, reliable, and scalable technology.',
   location: 'Ethiopia',
   locationDetail: 'Hawassa, Ethiopia',
   availability: 'Open to projects & collaboration',
   url: 'https://ephraim.withunion.net',
   businessName: 'WithUnion',
   businessUrl: 'https://withunion.net',
-  title: 'Ephraim Shibru | Software Developer & Business Technology',
+  title: 'Ephraim Shibru | Full-Stack Developer — Business Systems & AI Solutions',
   description:
-    'Explore the portfolio of Ephraim Shibru — a software developer building practical web applications, business management systems, AI-powered solutions, and digital products.',
+    'Portfolio of Ephraim Shibru — a full-stack developer in Ethiopia building practical web applications, backend services, business management systems, and AI-enabled solutions.',
 } as const
 
 export type SocialIcon = 'github' | 'linkedin' | 'upwork' | 'globe'
@@ -69,14 +74,12 @@ export const navigation: NavItem[] = [
 
 export const education = [
   {
-    field: 'Information Technology',
     institution: 'Hawassa University',
-    kind: 'Degree studies',
+    field: 'Information Technology',
   },
   {
-    field: 'Business Management',
     institution: 'Infolink College',
-    kind: 'Business studies',
+    field: 'Business Management',
   },
 ]
 

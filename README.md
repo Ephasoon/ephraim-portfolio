@@ -1,7 +1,7 @@
 # Ephraim Shibru — Portfolio
 
-Personal portfolio and case-study site for Ephraim Shibru, a software developer working across
-full-stack applications, business systems, and AI-enabled tools.
+Personal portfolio and case-study site for Ephraim Shibru, a full-stack developer working across
+web applications, business systems, and AI-enabled solutions.
 
 **Production domain:** https://ephraim.withunion.net
 
@@ -45,6 +45,14 @@ It writes screenshots and `audit.json` to `design/review/`.
 
 Project previews are real captures of the public demos. Private and in-progress projects use
 conceptual SVG previews from `src/components/PreviewArt.tsx` and are labelled as such.
+
+## CV
+
+No CV asset is currently bundled with the site. To enable a "Download CV" link:
+
+1. Add a verified PDF at `public/cv/ephraim-shibru-cv.pdf`.
+2. Add a CV entry to `src/data/site.ts` and a link in the navigation or contact section.
+3. Confirm the file downloads correctly in the production build.
 
 ## Deployment
 

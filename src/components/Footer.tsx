@@ -18,8 +18,8 @@ export function Footer() {
           <div className="footer__brand">
             <Logo />
             <p className="footer__about">
-              Software developer working between full-stack engineering, business systems, and
-              practical product design. Based in {site.locationDetail}.
+              Full-stack developer working between web applications, business systems, and
+              AI-enabled solutions. Based in {site.locationDetail}.
             </p>
           </div>
 
