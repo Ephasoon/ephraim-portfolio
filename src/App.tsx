@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
 import { BackToTop } from './components/BackToTop'
 import { Footer } from './components/Footer'
 import { Navbar } from './components/Navbar'
@@ -41,6 +41,7 @@ export default function App() {
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/work/wisionary-crm" element={<Navigate to="/work/withunion-crm" replace />} />
             <Route path="/work/:slug" element={<ProjectPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>

@@ -60,6 +60,33 @@ export function ProjectCard({ project, featured = false, delay = 0 }: ProjectCar
           </span>
         </div>
       </Link>
+
+      <div className="project-card__footer">
+        {project.demo ? (
+          <a
+            className="project-card__external"
+            href={project.demo.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="globe" size={15} />
+            Live demo
+            <Icon name="arrow-up-right" size={13} />
+          </a>
+        ) : null}
+        {project.source ? (
+          <a
+            className="project-card__external"
+            href={project.source.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Icon name="github" size={15} />
+            Source
+            <Icon name="arrow-up-right" size={13} />
+          </a>
+        ) : null}
+      </div>
     </article>
   )
 }

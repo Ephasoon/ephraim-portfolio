@@ -21,7 +21,7 @@ export function Projects() {
               Systems built for <span className="serif">real operations</span>.
             </>
           }
-          intro="A mix of live products, private builds, and work in progress. Each case study covers the problem, the approach, and the scope — without inflated claims."
+          intro="A mix of live demos, source-available builds, and work in progress. Each case study covers the problem, the solution, and the scope — without inflated claims."
           aside={`${projects.length} selected projects`}
         />
 
@@ -57,8 +57,8 @@ export function Projects() {
 
         <Reveal className="projects__note" delay={100}>
           <p>
-            Some commercial and client work is private. Where a public demo exists it is linked
-            directly; where it does not, the case study says so.
+            Public demos and source repositories are linked directly. Where something is not
+            public, the case study says so.
           </p>
         </Reveal>
       </div>

@@ -35,6 +35,9 @@ function ProjectView({ project }: { project: Project }) {
         url: site.url,
       },
       keywords: [...project.categories, ...project.tech].join(', '),
+      sameAs: [project.demo?.href, project.source?.href].filter(
+        (href): href is string => Boolean(href),
+      ),
     }),
     [project],
   )
@@ -67,7 +70,6 @@ function ProjectView({ project }: { project: Project }) {
 
           <h1 className="case__title">{project.name}</h1>
           <p className="case__tagline">{project.tagline}</p>
-          <p className="case__summary">{project.summary}</p>
 
           <dl className="case-meta">
             <div>
@@ -87,7 +89,7 @@ function ProjectView({ project }: { project: Project }) {
               <dd>
                 {project.demo ? (
                   <a href={project.demo.href} target="_blank" rel="noopener noreferrer">
-                    Live site
+                    Live demo
                     <Icon name="arrow-up-right" size={13} />
                   </a>
                 ) : (
@@ -141,21 +143,27 @@ function ProjectView({ project }: { project: Project }) {
         <div className="case__layout">
           <div className="case__content">
             <Reveal as="section" className="case-section">
-              <span className="mono-label">01 / Problem</span>
+              <span className="mono-label">01 / Overview</span>
+              <h2 className="case-section__title">Overview</h2>
+              <p>{project.summary}</p>
+            </Reveal>
+
+            <Reveal as="section" className="case-section">
+              <span className="mono-label">02 / Problem</span>
               <h2 className="case-section__title">The problem</h2>
               <p>{project.problem}</p>
             </Reveal>
 
             <Reveal as="section" className="case-section">
-              <span className="mono-label">02 / Approach</span>
-              <h2 className="case-section__title">The approach</h2>
-              <p>{project.approach}</p>
+              <span className="mono-label">03 / Solution</span>
+              <h2 className="case-section__title">The solution</h2>
+              <p>{project.solution}</p>
             </Reveal>
 
             {project.features ? (
               <Reveal as="section" className="case-section">
-                <span className="mono-label">03 / Scope</span>
-                <h2 className="case-section__title">What it includes</h2>
+                <span className="mono-label">04 / Key features</span>
+                <h2 className="case-section__title">Key features</h2>
                 <ul className="case-list">
                   {project.features.map((feature) => (
                     <li key={feature}>
@@ -166,48 +174,32 @@ function ProjectView({ project }: { project: Project }) {
                     </li>
                   ))}
                 </ul>
-              </Reveal>
-            ) : null}
-
-            {project.planned ? (
-              <Reveal as="section" className="case-section">
-                <span className="mono-label">03 / Direction</span>
-                <h2 className="case-section__title">Planned scope</h2>
-                <p className="case-section__lead">
-                  These modules are the current direction for the build. They are not delivered
-                  functionality yet.
-                </p>
-                <ul className="case-list case-list--planned">
-                  {project.planned.map((feature) => (
-                    <li key={feature}>
-                      <span className="case-list__icon case-list__icon--planned">
-                        <Icon name="arrow-right" size={13} />
-                      </span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
+                {project.featuresNote ? (
+                  <p className="case-section__note">{project.featuresNote}</p>
+                ) : null}
               </Reveal>
             ) : null}
 
             <Reveal as="section" className="case-section">
-              <span className="mono-label">04 / Technical notes</span>
-              <h2 className="case-section__title">Stack and implementation</h2>
-              {project.tech.length > 0 ? (
-                <ul className="tag-list case-stack" aria-label="Technologies used">
-                  {project.tech.map((tech) => (
-                    <li className="tag" key={tech}>
-                      {tech}
-                    </li>
-                  ))}
-                </ul>
-              ) : null}
+              <span className="mono-label">05 / Technical implementation</span>
+              <h2 className="case-section__title">Technical implementation</h2>
+              <ul className="tag-list case-stack" aria-label="Technologies used">
+                {project.tech.map((tech) => (
+                  <li className="tag" key={tech}>
+                    {tech}
+                  </li>
+                ))}
+              </ul>
+              {project.tech.length > 0 ? null : <p>Stack details are not published.</p>}
+              {project.technical.map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
               {project.stackNote ? <p className="case-section__note">{project.stackNote}</p> : null}
             </Reveal>
 
             <Reveal as="section" className="case-section">
-              <span className="mono-label">05 / Contribution</span>
-              <h2 className="case-section__title">My role</h2>
+              <span className="mono-label">06 / My contribution</span>
+              <h2 className="case-section__title">My contribution</h2>
               <ul className="tag-list" aria-label="Role and contribution">
                 {project.role.map((role) => (
                   <li className="tag" key={role}>
@@ -215,29 +207,78 @@ function ProjectView({ project }: { project: Project }) {
                   </li>
                 ))}
               </ul>
+              <ul className="case-list">
+                {project.contribution.map((item) => (
+                  <li key={item}>
+                    <span className="case-list__icon">
+                      <Icon name="check" size={14} />
+                    </span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </Reveal>
 
             <Reveal as="section" className="case-section">
-              <span className="mono-label">06 / Notes</span>
-              <h2 className="case-section__title">Status and scope</h2>
+              <span className="mono-label">07 / Project status</span>
+              <h2 className="case-section__title">Project status</h2>
               <div className={`case-callout case-callout--${project.statusTone}`}>
                 <Icon name="info" size={17} />
                 <p>{project.scopeNote}</p>
               </div>
+              {project.planned ? (
+                <>
+                  <p className="case-section__lead case-planned__lead">Still in progress</p>
+                  <ul className="case-list case-list--planned">
+                    {project.planned.map((item) => (
+                      <li key={item}>
+                        <span className="case-list__icon case-list__icon--planned">
+                          <Icon name="arrow-right" size={13} />
+                        </span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : null}
             </Reveal>
 
-            {project.demo ? (
-              <Reveal className="case__live">
-                <div>
-                  <span className="mono-label">Public demo</span>
-                  <p>Explore the live product directly.</p>
-                </div>
-                <a className="btn btn--primary" href={project.demo.href} target="_blank" rel="noopener noreferrer">
-                  {project.demo.label}
-                  <Icon name="arrow-up-right" size={16} />
-                </a>
-              </Reveal>
-            ) : null}
+            <Reveal as="section" className="case-section">
+              <span className="mono-label">08 / Links</span>
+              <h2 className="case-section__title">Explore the project</h2>
+              <div className="case-links">
+                {project.demo ? (
+                  <a
+                    className="btn btn--primary"
+                    href={project.demo.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Icon name="globe" size={17} />
+                    {project.demo.label}
+                    <Icon name="arrow-up-right" size={16} />
+                  </a>
+                ) : null}
+                {project.source ? (
+                  <a
+                    className={`btn ${project.demo ? 'btn--ghost' : 'btn--primary'}`}
+                    href={project.source.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Icon name="github" size={17} />
+                    {project.source.label}
+                    <Icon name="arrow-up-right" size={16} />
+                  </a>
+                ) : null}
+                {!project.demo && !project.source ? (
+                  <p className="case-section__note">No public demo or repository is available.</p>
+                ) : null}
+              </div>
+              {project.demo && !project.source ? (
+                <p className="case-section__note">Source code is not public.</p>
+              ) : null}
+            </Reveal>
           </div>
 
           <aside className="case__aside">
@@ -262,17 +303,36 @@ function ProjectView({ project }: { project: Project }) {
                 </div>
               </dl>
 
-              {project.demo ? (
-                <a className="btn btn--primary case-aside__cta" href={project.demo.href} target="_blank" rel="noopener noreferrer">
-                  Visit the live site
-                  <Icon name="arrow-up-right" size={16} />
-                </a>
-              ) : (
-                <p className="case-aside__private">
-                  <Icon name="lock" size={15} />
-                  Private build. No public demo is available.
-                </p>
-              )}
+              <div className="case-aside__actions">
+                {project.demo ? (
+                  <a
+                    className="btn btn--primary case-aside__cta"
+                    href={project.demo.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Visit the live site
+                    <Icon name="arrow-up-right" size={16} />
+                  </a>
+                ) : null}
+                {project.source ? (
+                  <a
+                    className={`btn ${project.demo ? 'btn--ghost' : 'btn--primary'} case-aside__cta`}
+                    href={project.source.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <Icon name="github" size={16} />
+                    View source
+                  </a>
+                ) : null}
+                {!project.demo && !project.source ? (
+                  <p className="case-aside__private">
+                    <Icon name="lock" size={15} />
+                    No public demo or source is available.
+                  </p>
+                ) : null}
+              </div>
 
               <Link className="case-aside__contact" to="/#contact">
                 Discuss a similar project

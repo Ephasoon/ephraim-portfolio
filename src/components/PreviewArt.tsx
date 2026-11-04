@@ -45,10 +45,10 @@ function GatewayArt() {
         One backend access layer between applications and model APIs.
       </text>
 
-      <rect x="966" y="64" width="164" height="36" rx="18" fill="rgba(242,200,121,0.08)" stroke="rgba(242,200,121,0.28)" />
-      <circle cx="986" cy="82" r="3.5" fill="#f2c879" />
-      <text x="998" y="87" fill="#f2c879" fontSize="11" letterSpacing="1.3" fontFamily="Inter Variable, sans-serif">
-        PRIVATE BUILD
+      <rect x="966" y="64" width="164" height="36" rx="18" fill="rgba(91,149,248,0.08)" stroke="rgba(91,149,248,0.28)" />
+      <circle cx="986" cy="82" r="3.5" fill="#5b95f8" />
+      <text x="998" y="87" fill="#9dc0ff" fontSize="11" letterSpacing="1.3" fontFamily="Inter Variable, sans-serif">
+        SOURCE AVAILABLE
       </text>
 
       <path d="M320 286 C370 286 370 336 420 336" fill="none" stroke="rgba(91,149,248,0.4)" strokeWidth="1.4" />
@@ -395,7 +395,7 @@ function CrmArt() {
       <circle cx="120" cy="82" r="4" fill="#33465e" />
       <rect x="470" y="70" width="260" height="24" rx="12" fill="#06111f" stroke="rgba(151,179,214,0.12)" />
       <text x="600" y="86" fill="#6f849c" fontSize="10" textAnchor="middle" fontFamily="Inter Variable, sans-serif">
-        wisionary.app / pipeline
+        withunion-crm / pipeline
       </text>
 
       <path d="M260 110v584" stroke="rgba(151,179,214,0.14)" />
@@ -405,10 +405,10 @@ function CrmArt() {
       <path d="M93 150h8l4 4 4-4h8v3.5H93z" fill="#8ab4ff" />
       <path d="M93 158h17v3.5H93z" fill="#8ab4ff" opacity="0.7" />
       <text x="128" y="157" fill="#eef4fd" fontSize="15" fontWeight="600" fontFamily="Space Grotesk Variable, sans-serif">
-        Wisionary
+        WithUnion
       </text>
       <text x="128" y="173" fill="#778ba4" fontSize="9.5" letterSpacing="0.8" fontFamily="Inter Variable, sans-serif">
-        SALES CRM
+        BUSINESS CRM
       </text>
 
       {[
@@ -416,8 +416,8 @@ function CrmArt() {
         { y: 270, label: 'Lead Tracker', active: true },
         { y: 314, label: 'Clients' },
         { y: 358, label: 'Projects' },
-        { y: 402, label: 'Commission' },
-        { y: 446, label: 'Weekly Reports' },
+        { y: 402, label: 'Commissions' },
+        { y: 446, label: 'Reports' },
         { y: 490, label: 'Settings' },
       ].map((item) => (
         <g key={item.label}>
@@ -431,13 +431,13 @@ function CrmArt() {
         </g>
       ))}
 
-      <rect x="80" y="600" width="160" height="62" rx="12" fill="rgba(242,200,121,0.06)" stroke="rgba(242,200,121,0.22)" />
-      <circle cx="98" cy="622" r="3.5" fill="#f2c879" />
-      <text x="110" y="626" fill="#f2c879" fontSize="9" letterSpacing="0.8" fontFamily="Inter Variable, sans-serif">
-        PRIVATE BUILD
+      <rect x="80" y="600" width="160" height="62" rx="12" fill="rgba(91,149,248,0.06)" stroke="rgba(91,149,248,0.22)" />
+      <circle cx="98" cy="622" r="3.5" fill="#5b95f8" />
+      <text x="110" y="626" fill="#9dc0ff" fontSize="9" letterSpacing="0.8" fontFamily="Inter Variable, sans-serif">
+        SOURCE AVAILABLE
       </text>
       <text x="98" y="646" fill="#778ba4" fontSize="9" fontFamily="Inter Variable, sans-serif">
-        Internal preview
+        Public repository
       </text>
 
       <text x="294" y="160" fill="#7f93ad" fontSize="10" letterSpacing="2" fontFamily="Inter Variable, sans-serif">

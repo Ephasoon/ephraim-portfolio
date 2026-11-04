@@ -281,8 +281,28 @@
   color: var(--mint);
 }
 
+.case-callout--source .icon {
+  color: var(--accent);
+}
+
 .case-callout--private .icon {
   color: var(--accent);
+}
+
+.case-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  margin-top: 1.2rem;
+}
+
+.case-links .btn {
+  white-space: normal;
+  text-align: center;
+}
+
+.case-planned__lead {
+  margin-top: 1.4rem;
 }
 
 .case__live {
@@ -349,9 +369,15 @@
   line-height: 1.5;
 }
 
+.case-aside__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: 0.2rem;
+}
+
 .case-aside__cta {
   width: 100%;
-  margin-top: 0.2rem;
 }
 
 .case-aside__private {
