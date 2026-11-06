@@ -241,6 +241,35 @@
   color: var(--amber);
 }
 
+.case-list__icon--partial {
+  border-color: rgba(242, 200, 121, 0.35);
+  background: var(--amber-soft);
+  color: var(--amber);
+}
+
+.case-verification {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  margin-top: 0.9rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.6;
+}
+
+.case-verification__icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-top: 0.05rem;
+  border: 1px solid rgba(127, 227, 192, 0.32);
+  border-radius: 50%;
+  background: var(--mint-soft);
+  color: var(--mint);
+}
+
 .case-stack {
   margin-top: 1rem;
 }

@@ -39,6 +39,9 @@ export function ProjectCard({ project, featured = false, delay = 0 }: ProjectCar
             <span className="badge__dot" aria-hidden="true" />
             {project.status}
           </span>
+          {project.preview.kind === 'art' ? (
+            <span className="project-card__preview-label">Conceptual preview</span>
+          ) : null}
         </div>
 
         <div className="project-card__body">

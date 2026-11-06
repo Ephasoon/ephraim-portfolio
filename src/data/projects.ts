@@ -37,6 +37,7 @@ export interface Project {
   solution: string
   features?: string[]
   featuresNote?: string
+  partial?: string[]
   planned?: string[]
   tech: string[]
   stackNote?: string
@@ -47,6 +48,7 @@ export interface Project {
   demo?: ProjectLink
   source?: ProjectLink
   scopeNote: string
+  verification?: string
   metaDescription: string
 }
 
@@ -75,7 +77,11 @@ export const projects: Project[] = [
       'Reports, exports, contact messages, and password management',
     ],
     featuresNote:
-      'The public demo covers the patient-facing site. Admin modules are included in the project but require staff credentials, which are not published.',
+      'The public demo covers the patient-facing site, including the appointment and contact forms. Admin modules require staff credentials, which are not published. The patient portal is implemented in the project, but /portal.php currently returns PHP source on the public deployment instead of rendering the portal.',
+    partial: [
+      'Patient portal: implemented in the project, but the public deployment currently serves the PHP source instead of the portal page.',
+      'Admin dashboard, records, billing, and reporting: implemented but not publicly verifiable without staff credentials.',
+    ],
     tech: ['PHP 8', 'MySQL', 'PDO', 'Bootstrap 5', 'JavaScript'],
     stackNote:
       'Server-rendered PHP with PDO prepared statements, session-based authentication, and a MySQL schema for hospital operations.',
@@ -107,6 +113,8 @@ export const projects: Project[] = [
     },
     scopeNote:
       'Deployed as a public demo, not presented as a production hospital deployment. No real patient data is published, and administrative credentials are kept private.',
+    verification:
+      'Verified November 2026: the homepage, appointment and contact endpoints, and staff login are reachable on the public demo. Admin and patient-portal workflows could not be verified live.',
     metaDescription:
       'Panacea Hospital — a PHP and MySQL hospital platform with appointment booking, patient portal access, medical records, billing, and staff administration.',
   },
@@ -135,15 +143,34 @@ export const projects: Project[] = [
       'Notifications, documents, and organisation settings',
     ],
     featuresNote:
-      'Team & Roles and Integrations screens are present but still use static demo data. Invitation, billing, notification-preference, and payment-gateway workflows are not complete, and a dedicated task board is not exposed in the UI.',
-    tech: ['Next.js', 'TypeScript', 'PostgreSQL', 'Drizzle ORM', 'Zod', 'Tailwind CSS', 'Recharts'],
+      'Team & Roles and Integrations screens use static demo data. Organisation, commission-rule, and security settings persist to the database. Invitation, billing, notification-preference, and payment-gateway workflows are incomplete, and a dedicated task board is not exposed in the UI.',
+    partial: [
+      'Team & Roles and Integrations screens still use static demo data.',
+      'Invitation, billing, notification-preference, and payment-gateway workflows are incomplete.',
+      'A dedicated task board is not exposed in the UI, although tasks exist in the data model.',
+    ],
+    planned: [
+      'Database-backed team invitations and role management.',
+      'Billing, notification preferences, and payment-gateway integrations.',
+      'A task board and the remaining settings surfaces.',
+    ],
+    tech: [
+      'Next.js 16',
+      'React 19',
+      'TypeScript',
+      'PostgreSQL',
+      'Drizzle ORM',
+      'Zod',
+      'Tailwind CSS',
+      'Recharts',
+    ],
     stackNote:
-      'Next.js App Router with route handlers, PostgreSQL through Drizzle ORM, Zod validation, session-based authentication, and role checks on API routes.',
+      'Next.js App Router with route handlers, PostgreSQL through Drizzle ORM, Zod validation, session-based authentication, role checks on API routes, and security headers on every response.',
     technical: [
       'The app uses the Next.js App Router for both the interface and API route handlers, with PostgreSQL accessed through Drizzle ORM. Zod schemas validate request input on the server.',
-      'Authentication is session-based, with hashed session tokens and role checks for owners, admins, managers, sales representatives, support staff, and viewers. Business records are scoped to the signed-in user’s organisation.',
+      'Authentication is session-based, with SHA-256-hashed session tokens in httpOnly cookies and role checks for owners, admins, managers, sales representatives, support staff, and viewers. Business records are scoped to the signed-in user’s organisation, with a separate isolation-check script for cross-organisation leaks.',
       'Operational modules cover leads, clients, pipeline, projects, invoices and PDFs, payments, commissions, analytics, documents, notifications, and an AI assistant. The assistant uses a configured model when available and an in-app fallback otherwise.',
-      'Some surfaces remain intentionally incomplete: team invitations, integrations, billing, notification preferences, and a dedicated task view.',
+      'The service includes a minimal health endpoint, security headers, and rate limiting on the AI route. An audit-log table and setting exist, but no administrative write path is exposed yet. Some surfaces remain intentionally incomplete: team invitations, integrations, billing, notification preferences, and a dedicated task view.',
     ],
     role: ['Product design', 'Full-stack development', 'Database design', 'Business workflow modelling'],
     contribution: [
@@ -164,6 +191,8 @@ export const projects: Project[] = [
     },
     scopeNote:
       'Source is public, but there is no hosted demo. Some settings and team-management surfaces are unfinished; the core CRM, billing, commission, reporting, and document workflows are implemented.',
+    verification:
+      'Verified November 2026 against the public repository: authentication, organisation scoping, CRM records, invoices and PDFs, payments, commissions, analytics, documents, notifications, and the AI fallback are implemented. No hosted demo is available.',
     metaDescription:
       'WithUnion CRM — a full-stack Next.js and PostgreSQL CRM with leads, clients, projects, invoices, payments, commissions, analytics, and role-based access.',
   },
@@ -190,7 +219,12 @@ export const projects: Project[] = [
       'Admin dashboard with rooms, reservations, guests, check-in and check-out, billing, housekeeping, staff, reports, and settings',
     ],
     featuresNote:
-      'All booking and admin data is mock or local data. There is no authentication, database, payment processing, or persistence in this build.',
+      'All booking and admin data is mock or local data. There is no authentication, database, payment processing, or persistence in this build. The admin panel is reachable without a login, and the booking confirmation is a client-side state only.',
+    partial: [
+      'Booking confirmation is a client-side state; no reservation is stored or emailed.',
+      'The admin panel is publicly reachable without authentication.',
+      'No payment processing or backend persistence is implemented.',
+    ],
     tech: ['React 19', 'TypeScript', 'Vite', 'Tailwind CSS 4', 'React Router', 'Framer Motion', 'Recharts'],
     stackNote:
       'Client-side React application using local mock data. No backend services are implemented in the current repository.',
@@ -198,6 +232,7 @@ export const projects: Project[] = [
       'The interface is a React 19 single-page application built with TypeScript and Vite, with React Router handling the guest and admin views.',
       'Tailwind CSS 4 provides the responsive layout system, while Framer Motion handles interface transitions and Recharts is used for dashboard charts.',
       'Booking, reservation, and admin records are typed mock data held in the client. The project demonstrates interaction design and front-end architecture rather than a working hotel back office.',
+      'The admin routes are not protected by authentication, and the dashboard is a UI prototype over mock records. The booking flow ends in a local confirmation screen without creating a reservation.',
     ],
     role: ['Product design', 'Front-end engineering', 'Bilingual UX', 'Dashboard design'],
     contribution: [
@@ -226,6 +261,8 @@ export const projects: Project[] = [
     },
     scopeNote:
       'The public deployment is a front-end prototype. Booking, admin, and chatbot data are mock only; no real reservations, payments, or guest records are processed.',
+    verification:
+      'Verified November 2026 on the live deployment: guest pages, room filters, the booking flow, the English/Amharic switch, the chatbot, and the admin dashboard are reachable. Admin data is mock data and the panel has no authentication.',
     metaDescription:
       'GuestEase — a React and TypeScript hotel booking and operations prototype with English and Amharic interfaces, a guest booking flow, and an admin dashboard.',
   },
@@ -251,13 +288,25 @@ export const projects: Project[] = [
       'Markdown rendering with syntax highlighting',
       'HTML sanitisation before rendered responses are displayed',
     ],
+    featuresNote:
+      'The service is a development build. There is no authentication, rate limiting, model picker, or deployment hardening; the model is fixed on the server.',
+    partial: [
+      'The browser client and API have no authentication or rate limiting.',
+      'The model is fixed to openai/gpt-oss-20b:free; there is no model picker or routing.',
+      'No production deployment or hardening is included.',
+    ],
+    planned: [
+      'Authentication and per-user rate limiting.',
+      'Model selection and provider routing.',
+      'Deployment hardening and operational monitoring.',
+    ],
     tech: ['Node.js', 'Express 5', 'PostgreSQL', 'OpenAI SDK', 'OpenRouter API', 'Vanilla JavaScript'],
     stackNote:
       'Express 5 with the OpenAI SDK pointed at the OpenRouter base URL. The model is currently fixed to openai/gpt-oss-20b:free; there is no model picker, authentication, or rate limiting.',
     technical: [
       'The server is an Express 5 application backed by a PostgreSQL connection pool. Conversations and messages are stored as UUID-keyed records so chat history survives server restarts.',
-      'Model requests go through the OpenAI SDK with its base URL pointed at OpenRouter. The model is configured on the server rather than selected by the client.',
-      'The static browser client renders model responses as markdown, highlights code blocks, and sanitises the resulting HTML before inserting it into the page.',
+      'Model requests go through the OpenAI SDK with its base URL pointed at OpenRouter. The model is configured on the server rather than selected by the client, and requests time out after 60 seconds.',
+      'The static browser client lists saved conversations, creates new chats, renders model responses as markdown, highlights code blocks, and sanitises the resulting HTML with DOMPurify before inserting it into the page. Code blocks include a copy button.',
       'The current build is a development service. Authentication, rate limiting, model routing, and deployment hardening are not implemented yet.',
     ],
     role: ['Backend architecture', 'API integration', 'Database design', 'Front-end integration'],
@@ -279,6 +328,8 @@ export const projects: Project[] = [
     },
     scopeNote:
       'Public source is available, but there is no hosted demo. The current implementation has no authentication or rate limiting and should be treated as a development build, not a production gateway.',
+    verification:
+      'Verified November 2026 against the public repository: the Express 5 API, PostgreSQL conversation/message persistence, OpenRouter calls through the OpenAI SDK, the static chat client, sanitised markdown, and syntax highlighting are implemented. No hosted demo is available.',
     metaDescription:
       'OpenRouter AI Server — an Express and PostgreSQL gateway for AI conversations, OpenRouter integration, persistent chat history, and sanitised markdown rendering.',
   },
@@ -286,47 +337,68 @@ export const projects: Project[] = [
     slug: 'abugida-school',
     index: '05',
     name: 'Abugida School',
-    tagline: 'A school management API, still in active development.',
+    tagline: 'A school management API with role-scoped workflows, still in active development.',
     summary:
-      'An Express and PostgreSQL backend for school administration, with domain APIs for students, staff, parents, classes, attendance, exams, results, finance, timetables, documents, and reporting. The repository is backend-only and the project is still in progress.',
+      'An Express and PostgreSQL backend for school administration, with domain APIs for students, staff, parents, classes, attendance, exams, results, finance, timetables, documents, reporting, and analytics. The public repository is backend-only; the React frontend is developed separately. The project is still in active development.',
     categories: ['Business systems', 'In progress'],
     status: 'In progress',
     statusTone: 'progress',
     problem:
       'Schools often manage student information, staff records, and academic operations across paper files and spreadsheets. Reporting becomes slow, records drift apart, and daily coordination depends on institutional memory.',
     solution:
-      'A modular backend that models the school’s core records and exposes them through authenticated APIs. The current phase focuses on a dependable API foundation; the frontend and end-to-end workflows are still being completed.',
+      'A modular backend that models the school’s core records and exposes them through authenticated, role-scoped APIs. The current phase focuses on a dependable API foundation; the frontend and some end-to-end workflows are still being completed.',
     features: [
-      'JWT authentication and role-based access',
-      'Student, teacher, parent, and staff records',
-      'Academic years, classes, and subjects',
-      'Attendance, exams, grades, and results',
-      'Finance, fees, and account workflows',
-      'Timetable and document management',
-      'PDF exports, QR codes, analytics, and dashboard APIs',
+      'JWT access tokens with hashed, revocable refresh-token sessions',
+      'Role-based access for admin, principal, teacher, parent, and student',
+      'Student, teacher, parent, and staff records with class and subject assignments',
+      'Attendance marking, correction, reporting, and student history',
+      'Exams, grades, semester results, conduct, and promotion decisions',
+      'Monthly fee structures, charges, discounts, payments, receipts, and outstanding balances',
+      'Timetable management with conflict checks and class copying',
+      'Document uploads with category, privacy, and role-scoped access',
+      'PDF report cards, ID cards, and receipts, plus QR codes',
+      'Analytics, dashboards, audit logs, and school settings',
     ],
     featuresNote:
-      'These modules exist in the backend repository. They are not all complete end to end, and no frontend is included in the public repository.',
+      'These modules are implemented in the backend repository at different levels of maturity. The public repository is API-only; the React frontend is developed separately and is not included. The README describes the overall system as roughly 55% complete, which includes the frontend work that is not in this repository.',
+    partial: [
+      'The React frontend is a separate project and is not in the public repository.',
+      'Some academic and finance workflows are still being completed end to end.',
+      'The README describes the overall system as roughly 55% complete.',
+    ],
     planned: [
-      'Frontend application for staff and administrators',
-      'End-to-end testing of academic and finance workflows',
+      'Public frontend for staff, students, and parents',
+      'End-to-end browser testing across academic and finance workflows',
       'Deployment and production hardening',
     ],
-    tech: ['Node.js', 'Express', 'PostgreSQL', 'JWT', 'bcrypt', 'Multer', 'PDFKit', 'QRCode'],
+    tech: [
+      'Node.js',
+      'Express',
+      'PostgreSQL',
+      'JWT',
+      'bcrypt',
+      'Helmet',
+      'express-rate-limit',
+      'Multer',
+      'PDFKit',
+      'QRCode',
+    ],
     stackNote:
-      'Express API with PostgreSQL, JWT authentication, bcrypt password hashing, Helmet, rate limiting, Multer uploads, PDFKit exports, and QR code generation.',
+      'Express API with PostgreSQL, JWT access tokens and hashed refresh-token sessions, bcrypt password hashing, Helmet, login rate limiting, Multer uploads, PDFKit exports, and QR code generation.',
     technical: [
-      'The backend is organised as an Express API with separate route and controller modules for each school domain. PostgreSQL stores the core academic, staff, attendance, finance, and document records.',
-      'Authentication uses JWTs with bcrypt-hashed passwords. Helmet, rate limiting, and role checks are used to harden the API surface.',
-      'Document and reporting endpoints generate PDFs with PDFKit and QR codes for exported records. Multer handles file uploads.',
-      'The public repository is backend-only. The README estimates the project is about 55% complete, and the module routes are at different stages of completion.',
+      'The backend is an Express API organised into route, controller, middleware, service, and utility layers. PostgreSQL stores academic, staff, attendance, finance, document, and audit records, with SQL migrations applied in order.',
+      'Authentication uses short-lived JWT access tokens and revocable refresh-token sessions stored as SHA-256 hashes in PostgreSQL. Refresh tokens are set as httpOnly, same-site cookies; bcrypt hashes passwords. Login is rate-limited, and password changes or account disabling revoke active sessions.',
+      'Role and record-level checks scope access for admins, principals, teachers, parents, and students. Teachers can mark attendance and enter grades only for their assigned classes and subjects; parents and students see only their own records.',
+      'The API covers students, teachers, parents, classes, subjects, academic years, attendance, exams, results, conduct, promotion, monthly fees, payments, timetables, documents, PDFs, analytics, dashboards, audit logs, and settings.',
+      'The public repository is backend-only. The React frontend is a separate project and is not included; the README describes the overall system as roughly 55% complete.',
     ],
     role: ['Product scoping', 'Backend architecture', 'API development', 'Database design'],
     contribution: [
       'Scoped the school domain modules and their relationships.',
-      'Built the Express/PostgreSQL API structure and authentication layer.',
-      'Implemented domain routes for academic records, attendance, exams, finance, documents, and reporting.',
-      'Continued development toward complete end-to-end workflows and a frontend client.',
+      'Built the Express/PostgreSQL API structure, migrations, and authentication layer.',
+      'Implemented role- and record-level access rules across academic, attendance, results, finance, and document routes.',
+      'Added PDF exports, QR codes, audit logging, and project test scripts.',
+      'Continued development toward a separate frontend and complete end-to-end workflows.',
     ],
     preview: {
       kind: 'art',
@@ -339,9 +411,11 @@ export const projects: Project[] = [
       label: 'View source',
     },
     scopeNote:
-      'Active development, not a finished product. The public repository contains the backend only. The README estimates the project is about 55% complete, and the module routes are at different stages of completion.',
+      'Active development, not a finished product. The public repository contains the backend only; the React frontend is developed separately and is not included. The README describes the overall system as roughly 55% complete, and some routes and workflows are still being completed.',
+    verification:
+      'Verified November 2026 against the public repository: migrations 001–026, the route modules, JWT and refresh-token sessions, role middleware, finance/results/documents APIs, and the test scripts are present. No hosted demo or frontend is available.',
     metaDescription:
-      'Abugida School — an in-progress Express and PostgreSQL school management API covering students, staff, attendance, exams, finance, documents, and reporting.',
+      'Abugida School — an in-progress Express and PostgreSQL school management API covering students, staff, attendance, exams, results, finance, documents, and reporting.',
   },
 ]
 

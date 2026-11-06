@@ -226,9 +226,32 @@ function ProjectView({ project }: { project: Project }) {
                 <Icon name="info" size={17} />
                 <p>{project.scopeNote}</p>
               </div>
+              {project.verification ? (
+                <p className="case-verification">
+                  <span className="case-verification__icon">
+                    <Icon name="check" size={13} />
+                  </span>
+                  <span>{project.verification}</span>
+                </p>
+              ) : null}
+              {project.partial ? (
+                <>
+                  <p className="case-section__lead case-planned__lead">Partial or unverified</p>
+                  <ul className="case-list case-list--partial">
+                    {project.partial.map((item) => (
+                      <li key={item}>
+                        <span className="case-list__icon case-list__icon--partial">
+                          <Icon name="info" size={13} />
+                        </span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : null}
               {project.planned ? (
                 <>
-                  <p className="case-section__lead case-planned__lead">Still in progress</p>
+                  <p className="case-section__lead case-planned__lead">Planned or not yet implemented</p>
                   <ul className="case-list case-list--planned">
                     {project.planned.map((item) => (
                       <li key={item}>
