@@ -18,7 +18,7 @@ export function About() {
               every day.
             </p>
             <Link to="/#projects" className="btn btn--quiet about__link">
-              See what I have built
+              See my work
               <Icon name="arrow-right" size={15} />
             </Link>
           </Reveal>
@@ -43,9 +43,10 @@ export function About() {
                 digital products that help organizations improve their operations.
               </p>
               <p>
-                I'm open to professional opportunities, and to collaborating with founders and
-                early-stage startups — exploring ideas, developing products, and turning concepts
-                into working solutions through thoughtful technical collaboration.
+                I'm open to full-time roles, paid internships, and client projects, as well as
+                collaborating with founders and early-stage startups — exploring ideas, developing
+                products, and turning concepts into working solutions through thoughtful technical
+                collaboration.
               </p>
             </Reveal>
 

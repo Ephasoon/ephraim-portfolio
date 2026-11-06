@@ -357,7 +357,7 @@ function ProjectView({ project }: { project: Project }) {
                 ) : null}
               </div>
 
-              <Link className="case-aside__contact" to="/#contact">
+              <Link className="case-aside__contact" to="/#brief">
                 Discuss a similar project
                 <Icon name="arrow-right" size={15} />
               </Link>

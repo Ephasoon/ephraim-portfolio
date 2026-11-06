@@ -872,7 +872,7 @@
 .service-card {
   display: flex;
   flex-direction: column;
-  min-height: 19rem;
+  min-height: 22rem;
   padding: 1.4rem;
   border: 1px solid var(--line);
   border-radius: var(--radius-lg);
@@ -896,18 +896,31 @@
   line-height: 1.3;
 }
 
-.service-card__outcome {
+.service-card__problem {
   margin-top: 0.55rem;
   color: var(--text-muted);
   font-size: 0.85rem;
   line-height: 1.65;
 }
 
+.service-card__deliverables {
+  margin-top: 1rem;
+}
+
+.service-card__label {
+  display: block;
+  color: var(--text-muted);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
 .service-card__details {
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
-  margin-top: 1.1rem;
+  margin-top: 0.5rem;
   color: var(--text-soft);
   font-size: 0.8rem;
 }
@@ -924,6 +937,19 @@
   flex-shrink: 0;
   border-radius: 50%;
   background: var(--accent);
+}
+
+.service-card__value {
+  margin-top: 1rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--line);
+  color: var(--text-soft);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.service-card__value .service-card__label {
+  margin-bottom: 0.3rem;
 }
 
 .service-card__link {
@@ -1151,6 +1177,99 @@
   padding-top: clamp(4rem, 8vw, 7rem);
 }
 
+.contact__head {
+  max-width: 48rem;
+  margin-bottom: clamp(1.8rem, 4vw, 2.6rem);
+}
+
+.contact__head .section-title {
+  max-width: 20ch;
+}
+
+.contact__paths {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.95rem;
+  margin-bottom: clamp(2rem, 5vw, 3.2rem);
+}
+
+.path-card {
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1.2rem, 2.5vw, 1.6rem);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.path-card--employer {
+  border-color: rgba(127, 227, 192, 0.22);
+}
+
+.path-card--client {
+  border-color: var(--accent-line);
+  background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
+}
+
+.path-card__label {
+  color: var(--mint);
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.path-card--client .path-card__label {
+  color: var(--accent);
+}
+
+.path-card__title {
+  margin-top: 0.55rem;
+  font-size: 1.1rem;
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+}
+
+.path-card__text {
+  margin-top: 0.45rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.path-card__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  margin-top: auto;
+  padding-top: 1.1rem;
+}
+
+.path-card__links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  color: var(--text-soft);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.path-card__links a:hover {
+  color: var(--accent);
+}
+
+.path-card--employer .path-card__links a:hover {
+  color: var(--mint);
+}
+
+.path-card__links .icon {
+  transition: transform 0.2s var(--ease);
+}
+
+.path-card__links a:hover .icon {
+  transform: translate(1px, -1px);
+}
+
 .contact__grid {
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
@@ -1158,22 +1277,25 @@
   align-items: start;
 }
 
-.contact__intro .section-title {
-  max-width: 13ch;
-}
-
-.contact__channels {
-  margin-top: 2.2rem;
-}
-
 .contact__channels-title {
-  margin-bottom: 0.85rem;
+  margin-bottom: 0.4rem;
   color: var(--text-muted);
   font-family: var(--font-sans);
   font-size: 0.65rem;
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
+}
+
+.contact__channels-note {
+  margin-bottom: 0.9rem;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.contact__composer {
+  scroll-margin-top: calc(var(--nav-h) + 16px);
 }
 
 .channel-list {
@@ -1405,6 +1527,8 @@ textarea.input {
 
 .composer__output {
   min-height: 9.5rem;
+  max-height: 26rem;
+  field-sizing: content;
   background: var(--bg-soft);
   font-family: ui-monospace, 'Cascadia Code', 'SFMono-Regular', Consolas, monospace;
   font-size: 0.76rem;
@@ -1416,6 +1540,12 @@ textarea.input {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.55rem;
+}
+
+.composer__next {
+  color: var(--text-muted);
+  font-size: 0.76rem;
+  line-height: 1.55;
 }
 
 .composer__note {
@@ -1550,6 +1680,10 @@ textarea.input {
     flex-direction: column;
     align-items: flex-start;
     gap: 0.8rem;
+  }
+
+  .contact__paths {
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .education-grid {

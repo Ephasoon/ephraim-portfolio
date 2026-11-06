@@ -138,7 +138,7 @@ export function Navbar() {
           <div className="nav__actions">
             <ThemeToggle />
             <Link to="/#contact" className="btn btn--primary btn--sm nav__cta">
-              Start a project
+              Work with me
               <Icon name="arrow-up-right" size={15} />
             </Link>
             <button
@@ -192,7 +192,7 @@ export function Navbar() {
         <div className="mobile-menu__foot">
           <div className="mobile-menu__actions">
             <Link to="/#contact" className="btn btn--primary" onClick={() => setOpen(false)}>
-              Start a project
+              Work with me
               <Icon name="arrow-up-right" size={16} />
             </Link>
             <ThemeToggle />

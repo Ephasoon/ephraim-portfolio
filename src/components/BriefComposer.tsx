@@ -5,8 +5,9 @@ import { Icon } from './Icon'
 const projectTypes = [
   'Web application',
   'Business management system',
+  'Backend or API',
+  'AI integration or automation',
   'CRM or sales tool',
-  'AI-enabled tool',
   'Startup MVP',
   'Something else',
 ]
@@ -14,13 +15,16 @@ const projectTypes = [
 interface FormValues {
   name: string
   type: string
-  message: string
+  building: string
+  problem: string
+  context: string
 }
 
 type FieldName = keyof FormValues
 type Errors = Partial<Record<FieldName, string>>
+type CopyState = 'idle' | 'copying' | 'copied' | 'manual'
 
-const emptyValues: FormValues = { name: '', type: '', message: '' }
+const emptyValues: FormValues = { name: '', type: '', building: '', problem: '', context: '' }
 
 function validate(values: FormValues): Errors {
   const errors: Errors = {}
@@ -31,28 +35,37 @@ function validate(values: FormValues): Errors {
   if (!values.type) {
     errors.type = 'Choose the closest project type.'
   }
-
-  const messageLength = values.message.trim().length
-  if (messageLength < 20) {
-    errors.message = 'Describe the project in at least 20 characters.'
-  } else if (messageLength > 1200) {
-    errors.message = 'Keep the message under 1,200 characters.'
+  if (values.building.trim().length < 20) {
+    errors.building = 'Describe what you want to build in at least 20 characters.'
+  }
+  if (values.problem.trim().length < 15) {
+    errors.problem = 'Describe the problem in at least 15 characters.'
   }
 
   return errors
 }
 
 function buildBrief(values: FormValues): string {
-  return [
+  const lines = [
     `Project brief — ${values.type}`,
     '',
     `Name: ${values.name.trim()}`,
     '',
-    values.message.trim(),
+    'What I want to build:',
+    values.building.trim(),
     '',
-    '---',
-    'Prepared via ephraim.withunion.net',
-  ].join('\n')
+    'Problem to solve:',
+    values.problem.trim(),
+  ]
+
+  const context = values.context.trim()
+  if (context) {
+    lines.push('', 'Additional context:', context)
+  }
+
+  lines.push('', '---', 'Prepared via ephraim.withunion.net', 'Not submitted automatically.')
+
+  return lines.join('\n')
 }
 
 export function BriefComposer() {
@@ -60,7 +73,7 @@ export function BriefComposer() {
   const [values, setValues] = useState<FormValues>(emptyValues)
   const [errors, setErrors] = useState<Errors>({})
   const [brief, setBrief] = useState('')
-  const [copyState, setCopyState] = useState<'idle' | 'copied' | 'manual'>('idle')
+  const [copyState, setCopyState] = useState<CopyState>('idle')
   const [submitted, setSubmitted] = useState(false)
 
   const fieldId = (name: FieldName) => `${baseId}-${name}`
@@ -85,6 +98,7 @@ export function BriefComposer() {
   }
 
   const copyBrief = async (text: string) => {
+    setCopyState('copying')
     try {
       await navigator.clipboard.writeText(text)
       setCopyState('copied')
@@ -101,6 +115,8 @@ export function BriefComposer() {
     const firstError = (Object.keys(nextErrors) as FieldName[])[0]
     if (firstError) {
       setSubmitted(false)
+      setCopyState('idle')
+      setBrief('')
       document.getElementById(fieldId(firstError))?.focus()
       return
     }
@@ -111,14 +127,21 @@ export function BriefComposer() {
     await copyBrief(text)
   }
 
+  const statusText =
+    copyState === 'copying'
+      ? 'Copying the brief to your clipboard…'
+      : copyState === 'copied'
+        ? 'Brief copied. Paste it into a LinkedIn or Upwork message to start the conversation. Nothing has been sent automatically.'
+        : 'Clipboard access was blocked. Select the brief below and copy it manually. Nothing has been sent automatically.'
+
   return (
     <div className="composer card">
       <div className="composer__head">
         <span className="eyebrow">Project brief</span>
-        <h3 className="composer__title">Compose a message</h3>
+        <h3 className="composer__title">Prepare a project brief</h3>
         <p className="composer__intro">
-          Write a short brief here and copy it into LinkedIn or Upwork. Nothing is submitted from
-          this page.
+          Answer a few questions to prepare a short brief. Nothing is sent from this page; copy the
+          brief into LinkedIn or Upwork when you are ready.
         </p>
       </div>
 
@@ -175,26 +198,67 @@ export function BriefComposer() {
 
         <div className="field">
           <div className="field__label-row">
-            <label htmlFor={fieldId('message')}>What are you building?</label>
-            <span className="field__count">{values.message.length}/1200</span>
+            <label htmlFor={fieldId('building')}>What do you want to build?</label>
+            <span className="field__count">{values.building.length}/800</span>
           </div>
           <textarea
-            id={fieldId('message')}
+            id={fieldId('building')}
             className="input composer__textarea"
-            name="message"
-            rows={5}
-            maxLength={1200}
-            value={values.message}
-            onChange={(event) => update('message', event.target.value)}
-            aria-invalid={errors.message ? true : undefined}
-            aria-describedby={errors.message ? errorId('message') : undefined}
-            placeholder="The problem, the users, and what a first version should achieve."
+            name="building"
+            rows={4}
+            maxLength={800}
+            value={values.building}
+            onChange={(event) => update('building', event.target.value)}
+            aria-invalid={errors.building ? true : undefined}
+            aria-describedby={errors.building ? errorId('building') : undefined}
+            placeholder="A booking system for a hotel, a client portal, an internal dashboard…"
           />
-          {errors.message ? (
-            <p className="field__error" id={errorId('message')}>
-              {errors.message}
+          {errors.building ? (
+            <p className="field__error" id={errorId('building')}>
+              {errors.building}
             </p>
           ) : null}
+        </div>
+
+        <div className="field">
+          <div className="field__label-row">
+            <label htmlFor={fieldId('problem')}>What problem should it solve?</label>
+            <span className="field__count">{values.problem.length}/600</span>
+          </div>
+          <textarea
+            id={fieldId('problem')}
+            className="input composer__textarea"
+            name="problem"
+            rows={4}
+            maxLength={600}
+            value={values.problem}
+            onChange={(event) => update('problem', event.target.value)}
+            aria-invalid={errors.problem ? true : undefined}
+            aria-describedby={errors.problem ? errorId('problem') : undefined}
+            placeholder="The workflow that is slow, manual, or hard to manage today."
+          />
+          {errors.problem ? (
+            <p className="field__error" id={errorId('problem')}>
+              {errors.problem}
+            </p>
+          ) : null}
+        </div>
+
+        <div className="field">
+          <div className="field__label-row">
+            <label htmlFor={fieldId('context')}>Anything else I should know? (optional)</label>
+            <span className="field__count">{values.context.length}/400</span>
+          </div>
+          <textarea
+            id={fieldId('context')}
+            className="input composer__textarea"
+            name="context"
+            rows={3}
+            maxLength={400}
+            value={values.context}
+            onChange={(event) => update('context', event.target.value)}
+            placeholder="Timeline, existing tools, links, or constraints."
+          />
         </div>
 
         <button type="submit" className="btn btn--primary composer__submit">
@@ -206,15 +270,13 @@ export function BriefComposer() {
       {submitted ? (
         <div className="composer__result">
           <p className="composer__status" role="status" aria-live="polite">
-            {copyState === 'copied'
-              ? 'Brief copied to your clipboard. Open LinkedIn or Upwork and paste it into a message.'
-              : 'Clipboard access was blocked. Select the brief below and copy it manually.'}
+            {statusText}
           </p>
           <textarea
             className="input composer__output"
             value={brief}
             readOnly
-            rows={7}
+            rows={9}
             aria-label="Prepared project brief"
             onFocus={(event) => event.currentTarget.select()}
           />
@@ -232,6 +294,10 @@ export function BriefComposer() {
               <Icon name="arrow-up-right" size={15} />
             </a>
           </div>
+          <p className="composer__next">
+            Paste the brief into a LinkedIn or Upwork message to start the conversation. This page
+            does not send anything.
+          </p>
         </div>
       ) : null}
 

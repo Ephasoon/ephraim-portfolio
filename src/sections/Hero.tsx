@@ -56,7 +56,7 @@ export function Hero() {
                 <Icon name="arrow-right" size={17} />
               </Link>
               <Link to="/#contact" className="btn btn--ghost">
-                Discuss a project
+                Start a conversation
                 <Icon name="arrow-up-right" size={16} />
               </Link>
             </div>

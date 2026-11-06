@@ -54,14 +54,14 @@ export function Footer() {
               <li>
                 <span className="badge badge--live">
                   <span className="badge__dot" aria-hidden="true" />
-                  Open to projects
+                  Open to roles &amp; projects
                 </span>
               </li>
               <li>
                 <span>Remote &amp; in-person</span>
               </li>
               <li>
-                <span>Freelance &amp; startup work</span>
+                <span>Roles, internships &amp; freelance</span>
               </li>
               <li>
                 <Link to="/#contact">Start a conversation</Link>

@@ -49,7 +49,7 @@ export function Collaboration() {
             </p>
 
             <div className="collab__actions">
-              <Link to="/#contact" className="btn btn--primary">
+              <Link to="/#brief" className="btn btn--primary">
                 Discuss your idea
                 <Icon name="arrow-up-right" size={16} />
               </Link>

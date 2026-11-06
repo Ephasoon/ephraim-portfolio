@@ -29,16 +29,23 @@ export function Services() {
                 <span className="service-card__index">0{index + 1}</span>
               </div>
               <h3 className="service-card__title">{service.title}</h3>
-              <p className="service-card__outcome">{service.outcome}</p>
-              <ul className="service-card__details">
-                {service.details.map((detail) => (
-                  <li key={detail}>
-                    <span className="service-card__dot" aria-hidden="true" />
-                    {detail}
-                  </li>
-                ))}
-              </ul>
-              <Link to="/#contact" className="service-card__link">
+              <p className="service-card__problem">{service.problem}</p>
+              <div className="service-card__deliverables">
+                <span className="service-card__label">What I deliver</span>
+                <ul className="service-card__details">
+                  {service.deliverables.map((deliverable) => (
+                    <li key={deliverable}>
+                      <span className="service-card__dot" aria-hidden="true" />
+                      {deliverable}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <p className="service-card__value">
+                <span className="service-card__label">Value</span>
+                {service.value}
+              </p>
+              <Link to="/#brief" className="service-card__link">
                 Discuss this service
                 <Icon name="arrow-up-right" size={15} />
               </Link>
@@ -51,7 +58,7 @@ export function Services() {
             Every engagement starts with scope. We agree on what the first version needs to do
             before writing production code.
           </p>
-          <Link to="/#contact" className="btn btn--quiet">
+          <Link to="/#brief" className="btn btn--quiet">
             Start with a project brief
             <Icon name="arrow-right" size={15} />
           </Link>

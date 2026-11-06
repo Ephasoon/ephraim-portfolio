@@ -7,16 +7,16 @@ export const site = {
   heroIntro:
     'I build practical web applications, backend services, and business management systems that solve real-world problems. Combining software engineering with business understanding, I turn ideas and operational challenges into functional digital solutions.',
   heroSupporting:
-    'From full-stack development and backend architecture to business workflow automation and AI integration, I focus on building useful, reliable, and scalable technology.',
+    'From full-stack development and backend architecture to business workflow automation and AI integration, I focus on building useful, reliable technology.',
   location: 'Ethiopia',
   locationDetail: 'Hawassa, Ethiopia',
-  availability: 'Open to projects & collaboration',
+  availability: 'Open to roles, projects & collaboration',
   url: 'https://ephraim.withunion.net',
   businessName: 'WithUnion',
   businessUrl: 'https://withunion.net',
   title: 'Ephraim Shibru | Full-Stack Developer — Business Systems & AI Solutions',
   description:
-    'Portfolio of Ephraim Shibru — a full-stack developer in Ethiopia building practical web applications, backend services, business management systems, and AI-enabled solutions.',
+    'Portfolio of Ephraim Shibru — a full-stack developer in Ethiopia building practical web applications, backend services, business management systems, and AI-enabled solutions. Open to full-time roles and client projects.',
 } as const
 
 export type SocialIcon = 'github' | 'linkedin' | 'upwork' | 'globe'
