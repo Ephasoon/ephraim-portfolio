@@ -296,6 +296,10 @@ p {
   transform: none;
 }
 
+.js .reveal.is-instant {
+  transition: none;
+}
+
 .skip-link:not(:focus-visible) {
   pointer-events: none;
 }
@@ -326,6 +330,14 @@ p {
     scroll-behavior: auto !important;
   }
 
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+@media print {
   .js .reveal {
     opacity: 1;
     transform: none;

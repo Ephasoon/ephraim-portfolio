@@ -1,8 +1,8 @@
-﻿import type { CSSProperties } from 'react'
-import { Link } from 'react-router-dom'
+﻿import { Link } from 'react-router-dom'
 import type { Project } from '../data/projects'
 import { Icon } from './Icon'
 import { PreviewArt } from './PreviewArt'
+import { Reveal } from './Reveal'
 
 interface ProjectCardProps {
   project: Project
@@ -14,9 +14,10 @@ export function ProjectCard({ project, featured = false, delay = 0 }: ProjectCar
   const tags = project.tech.length > 0 ? project.tech.slice(0, 3) : project.categories.slice(0, 3)
 
   return (
-    <article
-      className={featured ? 'project-card project-card--featured reveal' : 'project-card reveal'}
-      style={{ '--reveal-delay': `${delay}ms` } as CSSProperties}
+    <Reveal
+      as="article"
+      className={featured ? 'project-card project-card--featured' : 'project-card'}
+      delay={delay}
     >
       <Link className="project-card__link" to={`/work/${project.slug}`} aria-label={`Read the ${project.name} case study`}>
         <div className="project-card__preview">
@@ -87,6 +88,6 @@ export function ProjectCard({ project, featured = false, delay = 0 }: ProjectCar
           </a>
         ) : null}
       </div>
-    </article>
+    </Reveal>
   )
 }
